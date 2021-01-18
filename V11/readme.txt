@@ -1,0 +1,11 @@
+本版本通过解析tomacat提供的web,xml文件将HttpContext中保存所有资源后缀与对应的Content-Type值得Map
+属性mimeMapping初始化完毕,使得里面保存所有的类型1000多种.
+
+实现:
+1:再项目下新建目录config
+2:将tomcat提供的web.xml文件拷贝到config目录下
+3:在WebSever项目的配置文件pom.xml文件中加入dom4j的jar包导入
+4:重构com.Webserver.http包中的HTTPContext类的方法initMineMapping
+  方法中将原来固定向mimeMapping中添加6组键值对的操作删除.改为通过解析web.xml文件初始化.具体步骤:
+  使用dom4j解析config/web.xml文件.将根标签下所有名为<mime-mapping>的子标签获取到这个Map中完成
+  初始化工作,初始化后这个Map的size应当有1011个.
