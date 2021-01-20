@@ -12,7 +12,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowAllUserServlet {
+public class ShowAllUserServlet extends HttpServlet{
     private Logger logger= Logger.getLogger(ShowAllUserServlet.class);
 
 

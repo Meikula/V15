@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Arrays;
 
-public class RegServlet {
+public class RegServlet extends HttpServlet{
     public void service(HttpRequest request, HttpResponse response) {
         String username = request.getParameters("username");
         String password = request.getParameters("password");

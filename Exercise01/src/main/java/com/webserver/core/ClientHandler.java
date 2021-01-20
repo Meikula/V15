@@ -1,6 +1,7 @@
 package com.webserver.core;
 
 
+import com.webserver.servlet.HttpServlet;
 import com.webserver.servlet.LoginServlet;
 import com.webserver.servlet.RegServlet;
 import com.webserver.servlet.ShowAllUserServlet;
@@ -27,20 +28,20 @@ public class ClientHandler implements Runnable{
 
 
             String path = request.getRequestURI();
-            if("/myweb/regUser".equals(path)){
-                RegServlet regServlet = new RegServlet();
-                regServlet.service(request,response);
-            }
-            else if("/myweb/loginUser".equals(path)){
-                LoginServlet loginServlet = new LoginServlet();
-                loginServlet.service(request,response);
-            }
-            else if("/myweb/showAllUser".equals(path)){
-                ShowAllUserServlet showAllUserServlet = new ShowAllUserServlet();
-                showAllUserServlet.service(request,response);
+            Map<String, HttpServlet> servletMapping=new HashMap<>();
+            servletMapping.put("/myweb/regUser",new RegServlet());
+            servletMapping.put("/myweb/loginUser",new LoginServlet());
+            servletMapping.put("/myweb/showAllUser",new ShowAllUserServlet());
 
-            }
-                else{
+
+            /*if("/myweb/regUser".equals(path)) {
+                RegServlet regServlet = new RegServlet();
+                regServlet.service(request, response);
+            }*/
+            HttpServlet servlet = servletMapping.get(path);
+            if(servlet!=null){
+                servlet.service(request,response);
+            }else{
                 File file = new File("./webapps"+path);
                 if(file.exists()&&file.isFile()){
                     response.setEntity(file);
@@ -50,6 +51,8 @@ public class ClientHandler implements Runnable{
                     response.setStatusCode(404);
                     response.setStatusReason("NotFound");
                 }
+
+
 
             }
             response.flush();

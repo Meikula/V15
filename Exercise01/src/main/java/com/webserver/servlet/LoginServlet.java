@@ -6,7 +6,7 @@ import http.HttpResponse;
 import java.io.File;
 import java.io.RandomAccessFile;
 
-public class LoginServlet {
+public class LoginServlet extends HttpServlet{
     public void service(HttpRequest request,HttpResponse response){
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -16,10 +16,13 @@ public class LoginServlet {
             return;
 
         }
+        System.out.println(username);
+        System.out.println(password);
 
         try(RandomAccessFile raf = new RandomAccessFile("user.dat","r")){
             System.out.println("2222222222");
             for(int i=0;i<raf.length()/100;i++){
+                raf.seek(i*100);
                 byte[]data = new byte[32];
                 raf.read(data);
                 String name = new String(data,"UTF-8").trim();

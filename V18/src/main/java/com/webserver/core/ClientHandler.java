@@ -30,21 +30,13 @@ public class ClientHandler implements Runnable{
             //1 解析请求
             HttpRequest request = new HttpRequest(socket);
             HttpResponse response = new HttpResponse(socket);
-
-
-
             //2 处理请求
             String path = request.getRequestURI();
-
-
-
-
             //首先根据请求路径判断是否为请求业务
-            HttpServlet servlet = ServerContext.getServlet(path); 
+            HttpServlet servlet = ServerContext.getServlet(path);
             if(servlet!=null){
                 servlet.service(request,response);
             }
-
             else{
                 File file = new File("./webapps"+path);
                 if(file.exists()&&file.isFile()){

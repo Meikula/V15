@@ -6,7 +6,7 @@ import http.HttpResponse;
 import java.io.File;
 import java.io.RandomAccessFile;
 
-public class LoginServlet {
+public class LoginServlet extends HttpServlet{
     public void service(HttpRequest request, HttpResponse response){
         String username = request.getParameter("username");
         String psd = request.getParameter("password");

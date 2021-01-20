@@ -13,7 +13,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowAllUserServlet {
+public class ShowAllUserServlet extends HttpServlet{
     private static Logger logger= Logger.getLogger(ShowAllUserServlet.class);
     public void service(HttpRequest request, HttpResponse response){
         logger.info("开始生成动态页面.....");

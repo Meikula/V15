@@ -122,6 +122,7 @@ public class HttpRequest {
 
          */
         if(uri.contains("?")) {
+            System.out.println("111112131331");
             //按照?拆分请求与参数部分
             String data[] = uri.split("\\?");
             requestURI = data[0];
@@ -139,8 +140,6 @@ public class HttpRequest {
                     }
                 }
             }
-
-
             System.out.println("HttpRequest:进一步解析uri完毕!");
         }else{
              requestURI=uri;
